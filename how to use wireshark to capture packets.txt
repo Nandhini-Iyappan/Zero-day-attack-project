@@ -1,0 +1,31 @@
+as administrator
+
+
+cd "C:\Program Files\Wireshark"
+
+
+.\tshark.exe -D
+
+
+tshark -i 5 -c 1000 -T fields ^
+  -e frame.time_epoch -e frame.len -e ip.src -e ip.dst -e ip.proto ^
+  -e tcp.srcport -e tcp.dstport -e tcp.flags -e tcp.len -e tcp.window_size ^
+  -e udp.srcport -e udp.dstport -e udp.length ^
+  -E header=y -E separator=, -E quote=d > packets.csv
+
+
+
+dir packets.csv
+
+copy con feature_extract.py
+
+then paste python code
+
+then ctrl z and enter
+
+dir feature_extract.py
+
+python feature_extract.py packets.csv flows_dataset.csv
+
+
+
